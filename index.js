@@ -112,6 +112,13 @@ client.connect(err => {
           }
         }
       )
+        .then(result => {
+          res.send({
+            id: projectId,
+            date: datetime,
+            eventType: "Service",
+          })
+        })
     }
   })
 
@@ -138,13 +145,13 @@ client.connect(err => {
   app.post('/addTribe', (req, res) => {
     const menuTitle = req.body.menuTitle;
     const position = req.body.position;
-    const newPosition = {lat: JSON.parse(position.lat), lng: JSON.parse(position.lng)}
+    const newPosition = { lat: JSON.parse(position.lat), lng: JSON.parse(position.lng) }
     const client = req.body.client;
     const type = req.body.type;
     const serviceAge = req.body.serviceAge;
     const rented = req.body.rented;
     const serviceTable = req.body.serviceTable;
-    collection.insertOne({menuTitle, newPosition, client, type, serviceAge, rented, serviceTable})
+    collection.insertOne({ menuTitle, newPosition, client, type, serviceAge, rented, serviceTable })
       .then(result => {
         console.log(result);
       })
