@@ -45,7 +45,7 @@ client.connect(err => {
     if (id && tribe) {
       collection.updateOne(
         { _id: ObjectId(id) },
-        { $set: { 'tribe': tribe } }
+        { $set: { 'client': tribe } }
       )
         .then(result => {
           res.send({ tribe })
@@ -59,7 +59,7 @@ client.connect(err => {
     if (id && typeCategory) {
       collection.updateOne(
         { _id: ObjectId(id) },
-        { $set: { 'category': typeCategory } }
+        { $set: { 'type': typeCategory } }
       )
         .then(result => {
           res.send({ typeCategory })
@@ -74,7 +74,7 @@ client.connect(err => {
       collection.updateOne(
         { _id: ObjectId(id) },
         {
-          $set: { 'rentState': rentStatus },
+          $set: { 'rented': rentStatus },
         }
       )
         .then(result => {
@@ -90,7 +90,7 @@ client.connect(err => {
       collection.updateOne(
         { _id: ObjectId(id) },
         {
-          $set: { 'duration': `${serviceAgeHour} hours` },
+          $set: { 'serviceAge': `${serviceAgeHour} hours` },
         }
       )
     }
@@ -121,7 +121,6 @@ client.connect(err => {
   app.delete('/deleteService/:deleteId/:docId', (req, res) => {
     const deleteId = req.params.deleteId;
     const documentId = req.params.docId;
-    console.log(deleteId, documentId)
 
     collection.find({ _id: ObjectId(documentId) })
       .toArray((err, documents) => {
